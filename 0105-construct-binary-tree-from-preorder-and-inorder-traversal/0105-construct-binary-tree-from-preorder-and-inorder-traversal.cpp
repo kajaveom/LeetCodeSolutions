@@ -13,6 +13,7 @@ class Solution {
 public:
     
     int preIndex = 0;
+    unordered_map<int,int> indexes;
     
     TreeNode* constructTree(vector<int> preorder, vector<int> inorder, int si, int ei){
         
@@ -21,13 +22,7 @@ public:
         
         TreeNode* root = new TreeNode(preorder[preIndex++]);
         
-        int inIndex = 0;
-        for(int i = 0; i < inorder.size(); i++){
-            if(inorder[i]==root->val){
-                inIndex = i;
-                break;
-            }
-        }
+        int inIndex = indexes[root->val];
         
         root->left = constructTree(preorder,inorder,si,inIndex-1);
         root->right = constructTree(preorder,inorder,inIndex+1,ei);
@@ -36,6 +31,12 @@ public:
     }
     
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        
+        
+        for(int i = 0; i < inorder.size(); i++){
+            indexes[inorder[i]] = i;
+        }
+        
         return constructTree(preorder, inorder, 0, inorder.size()-1);
     }
 };

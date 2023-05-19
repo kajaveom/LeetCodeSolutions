@@ -20,20 +20,30 @@ public:
             return getHeight(root->left, dir) + 1;
         
         return getHeight(root->right, dir) + 1;
-    }   
-
-    int countNodes(TreeNode* root) {
+    } 
+    
+    int getCount(TreeNode* root, int lH, int rH){
         if(root==NULL)
             return 0;
         
-        int lH = getHeight(root->left,0);
-        int rH = getHeight(root->right,1);
+        if(lH == -1)
+        {
+            lH = getHeight(root->left,0);
+        }
         
+        if(rH == -1){
+            rH = getHeight(root->right,1);
+        }
+       
         if(lH == rH && lH!=0){
             //cout<<root->val<<" "<<lH<<endl;
             return pow(2 , lH+1) -1;
         }
         
-        return countNodes(root->left) + countNodes(root->right) + 1;
+        return getCount(root->left, lH-1, -1) + getCount(root->right, -1, rH-1) + 1;
+    }
+
+    int countNodes(TreeNode* root) {
+       return getCount(root,-1,-1);
     }
 };

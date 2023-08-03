@@ -3,9 +3,9 @@ public:
     
     int uniquePaths(int m, int n) {
         
-        vector<vector<long long>> memo(m+1, vector<long long>(n+1,0));
+        vector<long long> memo(n+1,0);
         
-        memo[1][1] = 1;
+        memo[1] = 1;
         
         //long long ans = 0;
         
@@ -13,11 +13,11 @@ public:
             for(int j = 1; j <= n; j++){
                 if(i==1 && j==1)
                     continue;
-                memo[i][j] = memo[i-1][j] + memo[i][j-1];
+                memo[j] = memo[j] + memo[j-1];
             }
         }
         
-        return memo[m][n];
+        return memo[n];
         
         
     }

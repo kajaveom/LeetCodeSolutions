@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    int dp[70][70][70][70];
+    int dp[70][70][70];
     
     int getMaximum(vector<vector<int>> &grid, int i1, int j1, int i2, int j2, int n, int m){
         
@@ -20,8 +20,8 @@ public:
         if(i2==n-1)
         return grid[i2][j2];
         
-        if(dp[i1][j1][i2][j2]!=-1)
-            return dp[i1][j1][i2][j2];
+        if(dp[i1][j1][j2]!=-1)
+            return dp[i1][j1][j2];
         
         int cherries= 0;
         if(i1==i2 && j1==j2)
@@ -50,7 +50,7 @@ public:
         //case9 r-r
         int c9 = getMaximum(grid,i1+1,j1+1,i2+1,j2+1,n,m);
         
-        return dp[i1][j1][i2][j2] = cherries + max({c1,c2,c3,c4,c5,c6,c7,c8,c9});
+        return dp[i1][j1][j2] = cherries + max({c1,c2,c3,c4,c5,c6,c7,c8,c9});
         
     }
     

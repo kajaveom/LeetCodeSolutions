@@ -6,14 +6,14 @@ public:
         for(int i = 0 ; i < n; i++)
             xorSum ^= nums[i];
         
+        int ans = pow(2,maximumBit) - 1;
         vector<int> res;
         
         for(int i = 1; i<= n; i++){
-            int ans = pow(2,maximumBit) - 1;
-            ans = ans ^ xorSum;
+
+            res.push_back(ans ^ xorSum);
             xorSum ^= nums[j];
             j--;
-            res.push_back(ans);
         }
         
        

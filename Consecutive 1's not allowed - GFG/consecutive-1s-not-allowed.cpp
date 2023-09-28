@@ -12,30 +12,27 @@ public:
 	
 	const int mod = 1e9+7;
 	
-	ll solve(int n, int set, vector<vector<int>> &dp){
-	    
-	    if(n==0)
-	    return 1;
-	    
-	    
-	    if(dp[n][set]!=-1)
-	    return dp[n][set];
-	    
-	    ll cnt = 0;
-	    if(!set)
-	    cnt += solve(n-1,1,dp);
-	    cnt += solve(n-1,0,dp);
-	    
-	    return dp[n][set] = cnt % mod;
-	}
-	
 	
 	ll countStrings(int n) {
 	    // code here
 	    
-	    vector<vector<int>> dp(n+1,vector<int>(2,-1));
+	    vector<vector<int>> dp(n+1,vector<int>(2,0));
+	    dp[0][0] = 1;
+	    dp[0][1] = 1;
 	    
-	    return solve(n,0,dp);
+	    for(int i = 1; i <= n; i++){
+	        for(int s = 0; s < 2; s++){
+	            ll cnt = 0;
+        	    if(!s)
+        	    cnt += dp[i-1][1];
+        	    cnt += dp[i-1][0];
+        	    
+        	    dp[i][s] = cnt % mod;
+	        }
+	    }
+
+	    
+	    return dp[n][0]%mod;
 
 	}
 };

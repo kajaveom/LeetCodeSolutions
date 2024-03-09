@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int getCommon(vector<int>& nums1, vector<int>& nums2) {
+     
+        unordered_set<int> st;
+        for(auto a : nums1)
+            st.insert(a);
+        
+        int res = INT_MAX;
+        for(auto a : nums2)
+        {
+            if(st.find(a) != st.end())
+                res = min(res, a);
+        }
+        
+        return res==INT_MAX?-1:res;
+        
+        
+    }
+};
